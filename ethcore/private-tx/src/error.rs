@@ -22,6 +22,7 @@ use types::transaction::Error as TransactionError;
 use ethkey::Error as KeyError;
 use ethkey::crypto::Error as CryptoError;
 use txpool::Error as TxPoolError;
+use serde_json::Error as SerdeError;
 
 error_chain! {
 	foreign_links {
@@ -30,6 +31,7 @@ error_chain! {
 		Trie(TrieError) #[doc = "Error concerning TrieDBs."];
 		Txpool(TxPoolError) #[doc = "Tx pool error."];
 		Crypto(CryptoError) #[doc = "Crypto error."];
+		Json(SerdeError) #[doc = "Json serialisation error."];
 	}
 
 	errors {
