@@ -386,7 +386,7 @@ impl Provider {
 			let chain_id = desc.original_transaction.chain_id();
 			let public_tx_hash = public_tx.hash(chain_id);
 			let signer_account = self.signer_account.ok_or_else(|| ErrorKind::SignerAccountNotSet)?;
-			let signature = self.accounts.sign(signer_account, hash)?;
+			let signature = self.accounts.sign(signer_account, public_tx_hash)?;
 			let signed = SignedTransaction::new(public_tx.with_signature(signature, chain_id))?;
 			match self.miner.import_own_transaction(&*self.client, signed.into()) {
 				Ok(_) => trace!(target: "privatetx", "Public transaction added to queue"),
